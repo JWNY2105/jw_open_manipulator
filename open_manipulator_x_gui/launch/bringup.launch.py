@@ -19,6 +19,10 @@ def generate_launch_description():
     moveit_launch_dir = os.path.join(
         get_package_share_directory(
             'open_manipulator_x_moveit_config'), 'launch')
+    
+    gui_launch_dir = os.path.join(
+        get_package_share_directory(
+            'open_manipulator_x_gui'), 'launch')
 
     # Hardware
     hardware_launch = IncludeLaunchDescription(
@@ -37,5 +41,12 @@ def generate_launch_description():
         PythonLaunchDescriptionSource([moveit_launch_dir, '/move_group.launch.py'])
     )
     ld.add_action(move_group_launch)
+
+    # gui
+    gui_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([gui_launch_dir, '/open_manipulator_x_gui.launch.py'])
+    )
+    ld.add_action(gui_launch)
+
 
     return ld
